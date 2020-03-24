@@ -1,0 +1,45 @@
+{% extends "main_layout.html" %}
+
+{% block titulo %}Gestión de Incidencias{% endblock %}
+{% block body %}
+<div class="card" id="carta1">
+<h1 class="card_title">Gestión de Empaques</h1>
+<div class="card_body">
+  <span><form action="fbp/" method="POST" name="busqueda_empaques">
+  <input type="text" name="busqueda" placeholder="Buscar" class="searcher">
+  <button type="submit" value="Send" id="send" class="button_search"><i class="fas fa-search"></i></button>
+  </form></span>
+  <a class="button" href=/empaques/frm/>Nuevo empaque</a><br>
+    {% if incidencias %}
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Descripcion</th>
+        <th>Empaque</th>
+        <th>Producto</th>
+        <th>Usuario</th>
+        <th>Acciones</th>
+      </tr>
+      {% for incidencia in incidencias %}
+      <tr>
+        <form action="form_incidencias/" method="POST" name="gestion_incidencias" class="card_body">
+          <td><input type="number" name="id" placeholder="Id" value="{{ incidencia.id }}" disabled></td>
+          <td><input type="text" name="descripcion" placeholder="Descripcion" value="{{ incidencia.Descripcion }}"></td>
+          <td><input type="number" name="empaque" placeholder="Empaque" value="{{ incidencia.Empaque }}"></td>
+          <td><input type="number" name="producto" placeholder="Producto" value="{{ incidencia.Producto }}"></td>
+          <td><input type="number" name="usuario" placeholder="Usuario" value="{{ incidencia.Usuario }}"></td>
+          <td><button type="submit" value="Modificar" id="send" class="button_icon" title="Guardar"><i class="fas fa-save"></i></button>
+              <button type="submit" value="Borrar" id="send" class="button_icon" title="Borrar"><a class="fas fa-trash"></a></button>
+          </td>
+        </form>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <table>
+      <tr>
+        <td>No hay incidencias registradas!</td>
+      </tr>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

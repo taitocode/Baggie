@@ -1,0 +1,55 @@
+{% extends "main_layout.html" %}
+
+{% block titulo %}Gestión de productos{% endblock %}
+{% block body %}
+<div class="card" id="carta1">
+<h1 class="card_title">Gestión de Empaques</h1>
+<div class="card_body">
+  <span><form action="fbp/" method="POST" name="busqueda_empaques">
+  <input type="text" name="busqueda" placeholder="Buscar" class="searcher">
+  <button type="submit" value="Send" id="send" class="button_search"><i class="fas fa-search"></i></button>
+  </form></span>
+  <a class="button" href=/empaques/frm/>Nuevo empaque</a><br>
+    {% if productos %}
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Variedad</th>
+        <th>Procedencia</th>
+        <th>Zafra</th>
+        <th>Acciones</th>
+      </tr>
+      {% for producto in productos %}
+      <tr>
+      <form action="modify/" method="POST" name="gestion_productos" class="card_body">
+      <td><input type="number" name="id" placeholder="Id" value="{{ producto.id }}" disabled></td>
+      <td><input type="text" name="nombre" placeholder="Nombre"  value="{{ producto.Nombre }}"></td>
+      <td><select name="variedad" id="variedad">
+        <option value="{{ producto.Variedad }}" selected>{{ producto.Variedad }} (actual)</option>
+        <option value="Guri">Guri</option>
+        <option value="Merin">Merin</option>
+        <option value="Olimar">Olimar</option>
+        <option value="Tacuari">Tacuari</option>
+      </select></td>
+      <td><select name="procedencia" id="procedencia">
+        <option value="{{ producto.Procedencia }}" selected>{{ producto.Procedencia }} (actual)</option>
+        <option value="Querencia">La Querencia</option>
+        <option value="StaTeresa">Sta Teresa</option>
+      </select></td>
+      <td><select name="zafra" id="zafra">
+        <option value="{{ producto.Zafra }}" selected>{{ producto.Zafra }} (actual)</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+      </select></td>
+      <td><button type="submit" value="Modificar" id="send" class="button_icon" title="Guardar"><i class="fas fa-save"></i></button>
+          <button type="submit" value="Borrar" id="send" class="button_icon" title="Borrar"><a class="fas fa-trash"></a></button>
+      </td>
+    </form>
+  </tr>
+      {% endfor %}
+    {% else %}
+      <p>No hay resultados.</p>
+    {% endif %}
+</div>
+{% endblock %}
